@@ -1,6 +1,6 @@
 {
-  "name": "@kilic.dev/error-pages",
-  "version": "2.0.3",
+  "name": "@kilic.dev/boilerplate-nextjs",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "start": "next start",
@@ -30,7 +30,6 @@
     "@types/styled-components": "^4",
     "@zeit/next-sass": "^1.0.1",
     "csstype": "^2.6.9",
-    "http-status": "^1.4.2",
     "next": "^9.2.2",
     "node-sass": "^4.13.1",
     "nprogress": "^0.2.0",

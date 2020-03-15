@@ -1,0 +1,82 @@
+{
+  "name": "@kilic.dev/error-pages",
+  "version": "2.0.3",
+  "license": "MIT",
+  "scripts": {
+    "start": "next start",
+    "dev:start": "next",
+    "lint": "eslint --fix --ext .json,.ts,.js,tsx,jsx ./src",
+    "dev:lint": "lint-staged",
+    "build": "yarn bundle && next export -o dist",
+    "bundle": "next build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run dev:lint"
+    }
+  },
+  "lint-staged": {
+    "src/*.{ts,js,tsx,jsx,json}": [
+      "yarn lint"
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/react-fontawesome": "^0.1.8",
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/lab": "^4.0.0-alpha.45",
+    "@types/styled-components": "^4",
+    "@zeit/next-sass": "^1.0.1",
+    "csstype": "^2.6.9",
+    "http-status": "^1.4.2",
+    "next": "^9.2.2",
+    "node-sass": "^4.13.1",
+    "nprogress": "^0.2.0",
+    "react": "^16.12.0",
+    "react-animations": "^1.0.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "styled-components": "^5.0.1",
+    "typescript": "^3.8.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@cenk1cenk2/eslint-config": "0.0.30",
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^10.0.0",
+    "@types/jest": "^25.1.3",
+    "@types/material-ui": "^0.21.7",
+    "@types/node": "^13.7.4",
+    "@types/react": "^16.9.22",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-router-dom": "^5.1.3",
+    "@types/styled-jsx": "^2.2.8",
+    "babel-plugin-styled-components": "^1.10.7",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "tsconfig-paths-webpack-plugin": "^3.2.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "files": [
+    "/dist"
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

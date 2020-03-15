@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  nextjs-boilerplate:
+    image: docker.ev.kilic.dev/nextjs-boilerplate
+    # ports:
+    #   - 80:80
+    networks:
+      - reverse-proxy
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy

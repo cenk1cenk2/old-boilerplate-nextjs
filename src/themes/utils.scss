@@ -1,0 +1,99 @@
+.remove-margin {
+  margin: 0 !important;
+
+  &-t {
+    margin-top: 0 !important;
+  }
+
+  &-r {
+    margin-right: 0 !important;
+  }
+
+  &-b {
+    margin-bottom: 0 !important;
+  }
+
+  &-l {
+    margin-left: 0 !important;
+  }
+}
+
+.remove-padding {
+  padding: 0 !important;
+
+  &-t {
+    padding-top: 0 !important;
+  }
+
+  &-r {
+    padding-right: 0 !important;
+  }
+
+  &-b {
+    padding-bottom: 0 !important;
+  }
+
+  &-l {
+    padding-left: 0 !important;
+  }
+}
+
+.pull {
+  &-right {
+    float: right;
+  }
+
+  &-left {
+    float: left;
+  }
+}
+
+.text {
+  &-left {
+    text-align: left;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-center {
+    text-align: center;
+  }
+}
+
+@mixin push-generate($space) {
+  margin-bottom: $space !important;
+
+  &-t {
+    margin-top: $space !important;
+  }
+
+  &-r {
+    margin-right: $space !important;
+  }
+
+  &-l {
+    margin-left: $space !important;
+  }
+}
+
+@for $i from 5 through 300 {
+  @if $i % 5 == 0 {
+    .push-#{$i} {
+      @include push-generate(#{$i}px);
+    }
+  }
+}
+
+@each $i in 3, 4, 5, 7, 9 {
+  .font-w#{$i * 100} {
+    font-weight: #{$i * 100} !important;
+  }
+}
+
+@for $i from 1 through 20 {
+  .font-s#{$i} {
+    font-size: #{1 + $i * 0.25}em !important;
+  }
+}

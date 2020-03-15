@@ -1,0 +1,31 @@
+kind: pipeline
+name: default
+
+trigger:
+  event:
+    - tag
+
+steps:
+  - name: test
+    image: node:current-alpine
+    commands:
+      - yarn --frozen-lockfile
+      - yarn lint
+
+  - name: transpile
+    image: node:current-alpine
+    commands:
+      - yarn build
+
+  - name: publish
+    image: plugins/docker
+    settings:
+      dockerfile: dockerfile.release
+      registry: docker.ev.kilic.dev
+      repo: docker.ev.kilic.dev/${DRONE_REPO_NAME,,}
+      tags:
+        - latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password

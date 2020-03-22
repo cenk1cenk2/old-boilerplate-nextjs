@@ -1,7 +1,6 @@
-import { faTerminal } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Grid } from '@material-ui/core'
 import React, { Component, Fragment } from 'react'
+import styled, { css } from 'styled-components'
 
 import { name, version } from '../../../package.json'
 
@@ -11,8 +10,10 @@ export class BottomLogo extends Component {
       <Fragment>
         <Grid container direction="column" justify="center" alignItems="center">
           <Grid container direction="row" justify="center" alignItems="center">
-            <Grid item className="text-logo push-5-r">
-              <FontAwesomeIcon icon={faTerminal} />
+            <Grid item>
+              <Logo>
+                <img src="/imgs/logo/logo.svg" alt="kilic.dev" />
+              </Logo>
             </Grid>
             <Grid item className="font-w300">
               {name}
@@ -26,3 +27,9 @@ export class BottomLogo extends Component {
     )
   }
 }
+
+const Logo = styled.div(({ theme }) => css`
+  width: ${theme.typography.fontSize}px;
+  margin-right: 5px;
+  margin-bottom: -5px;
+`)

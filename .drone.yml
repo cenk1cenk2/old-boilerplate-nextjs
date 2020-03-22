@@ -20,7 +20,7 @@ steps:
   - name: publish
     image: plugins/docker
     settings:
-      dockerfile: dockerfile.release
+      dockerfile: Dockerfile
       registry: docker.ev.kilic.dev
       repo: docker.ev.kilic.dev/${DRONE_REPO_NAME,,}
       tags:

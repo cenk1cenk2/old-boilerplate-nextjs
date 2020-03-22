@@ -38,6 +38,13 @@
   }
 }
 
+.reset {
+  &-shadow {
+    box-shadow: none;
+    --webkit-box-shadow: none;
+  }
+}
+
 .pull {
   &-right {
     float: right;
@@ -79,14 +86,18 @@
 }
 
 @for $i from 5 through 300 {
-  @if $i % 5 == 0 {
+  @if $i % 5==0 {
     .push-#{$i} {
       @include push-generate(#{$i}px);
     }
   }
 }
 
-@each $i in 3, 4, 5, 7, 9 {
+@each $i in 3,
+4,
+5,
+7,
+9 {
   .font-w#{$i * 100} {
     font-weight: #{$i * 100} !important;
   }

@@ -1,6 +1,6 @@
-import { ITextConfig } from 'interfaces/text.interface'
+import { ITheme } from '@interfaces/styles.interface'
 
-export const text: ITextConfig = {
+export const text: ITheme['text'] = {
   font: {
     heading: { name: 'Roboto', path: 'roboto' },
     default: { name: 'Lato', path: 'lato' }

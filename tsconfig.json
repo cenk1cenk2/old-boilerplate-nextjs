@@ -10,7 +10,8 @@
       "@pages/*": ["pages/*"],
       "@themes/*": ["themes/*"],
       "@templates/*": ["templates/*"],
-      "@page-templates/*": ["templates/pages/*"]
+      "@page-templates/*": ["templates/pages/*"],
+      "@utils/*": ["utils/*"],
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -27,7 +28,7 @@
     "declaration": false,
     "sourceMap": true,
     "removeComments": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "./dist",

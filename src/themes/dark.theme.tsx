@@ -3,27 +3,34 @@ import { ITheme } from 'interfaces/styles.interface'
 
 import { text } from './default.text'
 
-const colors = {
+const colors: ITheme['colors'] = {
   primary: '#454447',
   secondary: '#aaaaaa',
   success: '#78F029',
   warning: '#F0CE5C',
   error: '#F01C34',
   text: '#efefef',
-  muted: '#777777',
-  logo: '#f02424'
+  muted: '#777777'
 }
 
-const template = {
+const template: ITheme['template'] = {
   body: {
     0: '#121212',
     1: '#1c1c1c',
     2: '#282828'
+  },
+  header: {
+    headerSizeMin: '60px',
+    logoFieldWidth: '230px'
+  },
+  navigation: {
+    width: '230px',
+    collapseWidth: '60px'
   }
 }
 
 const muiTheme = createMuiTheme({
-  spacing: 20,
+  spacing: 5,
   palette: {
     type: 'dark',
     background: {
@@ -53,6 +60,12 @@ const muiTheme = createMuiTheme({
     fontFamily: text.font.default.name,
     fontSize: text.settings.options.fontSize
   },
+  mixins: {
+    toolbar: {
+      minHeight: template.header.headerSizeMin,
+      background: template.body[2]
+    }
+  },
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -70,6 +83,10 @@ const muiTheme = createMuiTheme({
   },
   shape: {
     borderRadius: 0
+  },
+  zIndex: {
+    drawer: 1050,
+    appBar: 1100
   }
 })
 

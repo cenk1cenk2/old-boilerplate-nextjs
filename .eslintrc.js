@@ -1,6 +1,7 @@
 module.exports = {
   extends: ['@cenk1cenk2/eslint-config/react-typescript'],
   rules: {
+    'indent': 'off',
     'import/order': [
       'error',
       {
@@ -39,6 +40,10 @@ module.exports = {
           },
           {
             pattern: '@page-templates/**',
+            group: 'index'
+          },
+          {
+            pattern: '@utils/**',
             group: 'index'
           }
         ],

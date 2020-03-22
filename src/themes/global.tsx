@@ -1,15 +1,13 @@
 import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
 
-export const GlobalStyles = createGlobalStyle`
-${({ theme }) => `
+export const GlobalStyles = createGlobalStyle(({ theme }) => css`
 ${body(theme)}
 ${fonts(theme)}
 ${headings(theme)}
 ${textColor(theme)}
 ${icons(theme)}
 ${progress(theme)}
-`}
-`
+`)
 
 function body (theme: DefaultTheme) {
   const o = `
@@ -95,7 +93,7 @@ function headings (theme: DefaultTheme) {
     `
     return o
   }, '')
-  return o
+  return css`${o}`
 }
 
 function textColor (theme: DefaultTheme) {
@@ -111,16 +109,15 @@ function textColor (theme: DefaultTheme) {
 }
 
 function icons (theme: DefaultTheme) {
-  const o = `
+  return css`
   .svg-inline--fa {
     font-size: 0.85em;
   }
   `
-  return css`${o}`
 }
 
 function progress (theme: DefaultTheme) {
-  const o = `
+  return css`
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;
@@ -203,6 +200,4 @@ function progress (theme: DefaultTheme) {
   }
 }
 `
-
-  return css`${o}`
 }

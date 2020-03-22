@@ -3,9 +3,10 @@ import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/do
 import React, { Fragment } from 'react'
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components'
 
-import PageLoader from '../themes/page-loader'
+import { project } from '@interfaces/project.constants'
 import { ITheme } from '@interfaces/styles.interface'
 import Theme from '@themes/index'
+import PageLoader from '@themes/page-loader'
 
 export default class MyDocument extends Document<{themes: ITheme}> {
   static async getInitialProps (ctx: DocumentContext) {
@@ -43,17 +44,12 @@ export default class MyDocument extends Document<{themes: ITheme}> {
           <Head>
             <link rel="icon" href="/favicon.ico" />
             <link rel="stylesheet" type="text/css" href="/styles/pageloader.css" />
-            <meta name="description" content="kilic.dev!" />
-            <meta name="author" content="cenk.kilic" />
+            <meta name="description" content={project.description} />
+            <meta name="author" content={project.author} />
             <meta name="theme-color" content={Theme.palette.primary.main} />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <meta name="description" content="Web site created using create-react-app" />
             <link rel="manifest" href="manifest.json" />
-            <style
-              dangerouslySetInnerHTML={{
-                __html: 'body{display:block}'
-              }}
-            />
+            <style dangerouslySetInnerHTML={{ __html: 'body{display:block}' }} />
           </Head>
           <body>
             <PageLoader />

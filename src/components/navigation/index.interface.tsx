@@ -1,5 +1,7 @@
 import { DefaultTheme } from 'styled-components'
 
+import { StateUtilsType } from '@utils/state.utils'
+
 export interface Props {
   header: {
     transperent?: boolean
@@ -12,13 +14,12 @@ export interface Props {
   theme?: DefaultTheme
 }
 
-export interface State {
+export interface State extends Partial<StateUtilsType<State, Action>> {
   navigation: {
-    enabled?: boolean
+    type?: NavigationTypes
     state?: NavigationStates
+    mouse?: boolean
   }
-  dispatch: (action: Action) => void
-  write: (state: Partial<State>) => void
 }
 
 export enum NavigationStates {
@@ -29,9 +30,9 @@ export enum NavigationStates {
 }
 
 export enum NavigationTypes {
-  header,
-  menu,
-  off
+  header = 'header',
+  menu = 'menu',
+  off = 'off'
 }
 
 export interface Action {
@@ -42,5 +43,7 @@ export interface Action {
 export enum ActionTypes {
   'navigation:toggle',
   'navigation:open',
-  'navigation:close'
+  'navigation:close',
+  'navigation:mouseEnter',
+  'navigation:mouseLeave'
 }

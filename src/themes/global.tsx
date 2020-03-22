@@ -6,6 +6,7 @@ ${fonts(theme)}
 ${headings(theme)}
 ${textColor(theme)}
 ${icons(theme)}
+${links(theme)}
 ${progress(theme)}
 `)
 
@@ -112,6 +113,67 @@ function icons (theme: DefaultTheme) {
   return css`
   .svg-inline--fa {
     font-size: 0.85em;
+  }
+  `
+}
+
+function links (theme: DefaultTheme) {
+  return css`
+  // Links
+  a {
+    color: ${theme.colors.primary};
+    transition: color 0.12s ease-out;
+
+    &.subtle {
+      color: ${theme.colors.text};
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        color: ${theme.colors.text};
+        text-decoration: none;
+      }
+    }
+
+    &.link-effect {
+      position: relative;
+
+      &:before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        content: '';
+        background-color: ${theme.colors.success};
+        visibility: hidden;
+        transform: scaleX(0);
+        transition: transform 0.12s ease-out;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      color: ${theme.colors.primary};
+      text-decoration: ${theme.colors.primary};
+
+      &.link-effect:before {
+        visibility: visible;
+        transform: scaleX(1);
+      }
+    }
+
+    &:active {
+      color: ${theme.colors.primary};
+    }
+
+    &.inactive {
+      cursor: not-allowed;
+
+      &:focus {
+        background-color: transparent !important;
+      }
+    }
   }
   `
 }

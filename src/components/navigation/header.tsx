@@ -1,13 +1,13 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { AppBar as BaseAppBar, Grid, Toolbar as BaseToolbar, Button } from '@material-ui/core'
+import { AppBar as BaseAppBar, Grid, Toolbar as BaseToolbar, Button, Hidden } from '@material-ui/core'
 import clsx from 'clsx'
 import { debounce } from 'lodash'
 import { Component, Fragment } from 'react'
 import styled, { DefaultTheme, withTheme, css } from 'styled-components'
 
 import { Consumer } from './index'
-import { ActionTypes } from './index.interface'
+import { ActionTypes, NavigationTypes } from './index.interface'
 import { CastEvent } from '@interfaces/event.interface'
 import { project } from '@interfaces/project.constants'
 
@@ -53,18 +53,26 @@ export class Header extends Component<Props, State> {
           <Toolbar className={clsx({ 'transperent-toolbar': this.props.transperent && !this.state?.headerSolid, 'narrow-toolbar': this.props.narrow })}>
             <Grid container direction="row" justify="space-between" alignItems="center" spacing={2}>
               <Grid item className="logoField">
-                <Grid container direction="row" alignItems="center">
-                  <Logo>
-                    <img src="/imgs/logo/logo.svg" alt={project.title} />
-                  </Logo>
-                  <Title>{project.title}</Title>
-                </Grid>
+                <a href="/" className="subtle">
+                  <Grid container direction="row" alignItems="center">
+                    <Logo>
+                      <img src="/imgs/logo/logo.svg" alt={project.title} />
+                    </Logo>
+                    <Title>{project.title}</Title>
+                  </Grid>
+                </a>
               </Grid>
               <Grid item>
                 <Consumer>
-                  {(context) => (
-                    <Button variant="outlined" onClick={() => { context.dispatch({ type: ActionTypes['navigation:toggle'] }) }}><FontAwesomeIcon icon={faBars} /></Button>
-                  )}
+                  {(context) => {
+                    if (context.navigation?.type === NavigationTypes.menu) {
+                      return (
+                        <Hidden smUp>
+                          <Button variant="outlined" onClick={() => { context.dispatch({ type: ActionTypes['navigation:toggle'] }) }}><FontAwesomeIcon icon={faBars} /></Button>
+                        </Hidden>
+                      )
+                    }
+                  }}
                 </Consumer>
               </Grid>
             </Grid>

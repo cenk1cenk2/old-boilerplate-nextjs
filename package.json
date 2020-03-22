@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "next start",
-    "dev:start": "next",
+    "dev:start": "node --inspect=0.0.0.0:9229 node_modules/.bin/next",
     "lint": "eslint --fix --ext .json,.ts,.js,tsx,jsx ./src",
     "dev:lint": "lint-staged",
     "build": "yarn bundle && next export -o dist",

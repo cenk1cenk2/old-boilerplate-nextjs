@@ -1,7 +1,3 @@
-export interface ObjectLiteral {
-  [name: string]: any
-}
+export type ObjectLiteral = Record<string, any>
 
-export interface ObjectLiteralString {
-  [name: string]: string
-}
+export type ObjectLiteralString = Record<string, string>

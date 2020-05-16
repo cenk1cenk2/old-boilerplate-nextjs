@@ -30,7 +30,7 @@ const template: ITheme['template'] = {
 }
 
 const muiTheme = createMuiTheme({
-  spacing: 5,
+  spacing: 8,
   palette: {
     type: 'dark',
     background: {

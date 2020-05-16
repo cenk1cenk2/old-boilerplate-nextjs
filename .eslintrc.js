@@ -1,7 +1,6 @@
 module.exports = {
   extends: ['@cenk1cenk2/eslint-config/react-typescript'],
   rules: {
-    'indent': 'off',
     'import/order': [
       'error',
       {

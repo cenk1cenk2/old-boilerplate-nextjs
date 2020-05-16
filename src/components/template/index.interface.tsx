@@ -1,8 +1,9 @@
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { DefaultTheme } from 'styled-components'
 
-import { StateUtilsType } from '@utils/state.utils'
+import { StateUtilsType } from '@src/utils/state.utils'
 
-export interface Props {
+export interface TemplateProps {
   header: {
     transperent?: boolean
   }
@@ -11,15 +12,29 @@ export interface Props {
     collapsable?: boolean
     type: NavigationTypes
   }
+  items?: NavigationItems[]
   theme?: DefaultTheme
+  project: {
+    name: string
+    version: string
+    author: string
+  }
 }
 
 export interface State extends Partial<StateUtilsType<State, Action>> {
-  navigation: {
+  narrow?: TemplateProps['narrow']
+  header?: TemplateProps['header']
+  navigation?: {
     type?: NavigationTypes
     state?: NavigationStates
     mouse?: boolean
   }
+}
+
+export interface NavigationItems {
+  icon?: IconDefinition
+  name?: string
+  url?: string
 }
 
 export enum NavigationStates {

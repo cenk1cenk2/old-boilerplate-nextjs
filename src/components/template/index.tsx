@@ -3,29 +3,32 @@ import { debounce } from 'lodash'
 import React, { Component, createContext, Fragment } from 'react'
 import styled, { css, withTheme } from 'styled-components'
 
-import { animations as DrawerAnimations, Drawer } from './drawer'
 import { Header } from './header'
-import { Action, ActionTypes, NavigationStates, NavigationTypes, Props, State } from './index.interface'
-import { CastEvent } from '@interfaces/event.interface'
-import { StateUtils } from '@utils/state.utils'
+import { Action, ActionTypes, NavigationStates, NavigationTypes, TemplateProps, State } from './index.interface'
+import { projectDetails } from '@interfaces/project.constants'
+import { animations as DrawerAnimations, DrawerNavigation } from '@src/components/template/drawer-navigation'
+import { CastEvent } from '@src/interfaces/event.interface'
+import { StateUtils } from '@src/utils/state.utils'
 
 export const Context = createContext<Partial<State>>({})
 export const { Consumer, Provider } = Context
 
 @(withTheme as any)
-export class Navigation extends Component<Props, Partial<State>> {
-  static defaultProps: Props = {
+export class Template extends Component<TemplateProps, Partial<State>> {
+  static defaultProps: TemplateProps = {
     header: {
-      transperent: false
+      transperent: true
     },
-    narrow: false,
+    narrow: true,
     navigation: {
-      type: NavigationTypes.menu,
+      type: NavigationTypes.header,
       collapsable: true
-    }
+    },
+    project: projectDetails
   }
 
   public state: Partial<State>= {
+    narrow: false,
     navigation: {
       type: NavigationTypes.off
     },
@@ -65,11 +68,14 @@ export class Navigation extends Component<Props, Partial<State>> {
 
   public componentDidMount () {
     // set easier logical operations
-    this.state.write({ navigation: { type: this.props.navigation.type } })
+    this.state.write({
+      navigation: { type: this.props.navigation.type }, narrow: this.props.narrow, header: this.props.header
+    })
+    this.state.write({ narrow: this.props.narrow })
 
     // set cross modes
-    if (this.props.narrow) {
-      this.props.navigation.type = NavigationTypes.header
+    if (this.props.navigation.type === NavigationTypes.menu) {
+      this.state.write({ narrow: false, header: { transperent: false } })
     }
 
     // add global listeners
@@ -93,9 +99,9 @@ export class Navigation extends Component<Props, Partial<State>> {
       let navigation: NavigationStates
       // decide on state, css makes it laggy
       if (this.props.navigation.collapsable && !this.state.navigation.mouse) {
-        navigation = window.innerWidth > this.props.theme.breakpoints.values.sm ? NavigationStates.collapse : NavigationStates.overlay
+        navigation = window.innerWidth > this.props.theme.breakpoints.values.md ? NavigationStates.collapse : NavigationStates.overlay
       } else {
-        navigation = window.innerWidth > this.props.theme.breakpoints.values.sm ? NavigationStates.open : NavigationStates.overlay
+        navigation = window.innerWidth > this.props.theme.breakpoints.values.md ? NavigationStates.open : NavigationStates.overlay
       }
 
       // set state
@@ -110,11 +116,10 @@ export class Navigation extends Component<Props, Partial<State>> {
     return (
       <Fragment>
         <Provider value={this.state}>
-          <Header transperent={this.props.header.transperent} narrow={this.props.narrow} />
-          <Drawer collapsable={this.props.navigation.collapsable} />
-          <Main className={clsx(this.state.navigation.state, { narrow: this.props.narrow })}>
+          <Header transperent={this.state.header?.transperent} narrow={this.state.narrow} project={this.props.project} />
+          <DrawerNavigation collapsable={this.props.navigation.collapsable} items={this.props.items} />
+          <Main className={clsx(this.state.navigation.state, { narrow: this.state.narrow })}>
             {this.props.children}
-            testing main
           </Main>
         </Provider>
       </Fragment>
@@ -123,7 +128,7 @@ export class Navigation extends Component<Props, Partial<State>> {
 
   private async handleResize (e: Partial<Event>) {
     const event = e as CastEvent<Window>
-    if (event.target.innerWidth < this.props.theme.breakpoints.values.sm) {
+    if (event.target.innerWidth < this.props.theme.breakpoints.values.md) {
       // set navigation type to menu type for smaller screens
       this.state.write({ navigation: { type: NavigationTypes.menu } })
 
@@ -168,6 +173,8 @@ ${DrawerAnimations('collapse', 'left')}
 &.close {
   left: 0;
 }
+
+padding: ${theme.spacing(1)}px;
 
 ${theme.breakpoints.up('lg')} {
   &.narrow {

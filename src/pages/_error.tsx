@@ -5,7 +5,7 @@ import NextError from 'next/error'
 import Router from 'next/router'
 import { Fragment } from 'react'
 
-import { Pulldown } from '../components/pulldown/pulldown'
+import { Pulldown } from '@components/pulldown/pulldown'
 import { ITheme } from '@interfaces/styles.interface'
 
 export default class Error extends NextError<ITheme> {

@@ -1,15 +1,14 @@
 import Head from 'next/head'
-import { Component, Fragment } from 'react'
+import { Fragment, FunctionComponent } from 'react'
 
-export default class Root extends Component {
-
-  render () {
-    return (
-      <Fragment>
-        <Head>
-          <title>Page Title</title>
-        </Head>
-      </Fragment>
-    )
-  }
+export const Root: FunctionComponent<any> = (props) => {
+  return (
+    <Fragment>
+      <Head>
+        <title>Empty Page Title</title>
+      </Head>
+    </Fragment>
+  )
 }
+
+export default Root

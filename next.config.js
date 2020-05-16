@@ -41,7 +41,21 @@ module.exports = {
       }
     )
 
+    config.node = {
+      fs: 'empty'
+    }
+
+    const internalNodeModulesRegExp = [ /@zeit(?!.*node_modules)/, /fs/ ]
+
+    config.externals = config.externals.map((module) => {
+      if (typeof module !== 'function') {
+        return module
+      }
+
+      return (ctx, req, cb) => (internalNodeModulesRegExp.some((item) => item.test(req)) ? cb() : module(ctx, req, cb))
+    })
+
     return config
   },
-  target: 'serverless'
+  target: 'server'
 }

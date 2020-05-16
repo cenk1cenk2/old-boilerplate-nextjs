@@ -1,20 +1,21 @@
-import { Drawer as BaseDrawer } from '@material-ui/core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Drawer as BaseDrawer, List, ListItem, ListItemIcon as BaseListItemIcon, ListItemText as BaseListItemText } from '@material-ui/core'
 import clsx from 'clsx'
 import { debounce } from 'lodash'
-import React, { Component, Fragment, useContext } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled, { css, DefaultTheme, withTheme } from 'styled-components'
 
-import { Consumer } from './index'
-import { NavigationTypes, State as Context, NavigationStates, ActionTypes } from './index.interface'
+import { Consumer } from '@src/components/template/index'
+import { ActionTypes, NavigationStates, NavigationTypes, State as Context, NavigationItems } from '@src/components/template/index.interface'
 
 export interface Props {
   theme?: DefaultTheme
-  items?: any
+  items?: NavigationItems[]
   collapsable?: boolean
 }
 
 @(withTheme as any)
-export class Drawer extends Component<Props> {
+export class DrawerNavigation extends Component<Props> {
 
   static defaultProps = {
     items: null,
@@ -35,7 +36,20 @@ export class Drawer extends Component<Props> {
               onMouseEnter={() => this.watchMouseEnter(context)}
               onMouseLeave={() => this.watchMouseLeave(context)}
             >
-              asdsadsada
+              <List>
+                {
+                  this.props.items.map((item) => {
+                    return (
+                      <Fragment key={item.url}>
+                        <ListItem button>
+                          <ListItemIcon><FontAwesomeIcon icon={item.icon} /></ListItemIcon>
+                          <ListItemText primary={item.name} className="h5" disableTypography />
+                        </ListItem>
+                      </Fragment>
+                    )
+                  })
+                }
+              </List>
             </Menu>
           )}
         </Consumer>
@@ -55,6 +69,15 @@ export class Drawer extends Component<Props> {
     }
   }
 }
+
+const ListItemIcon = styled(BaseListItemIcon)(({ theme }) => css`
+  min-width: calc(${theme.template.navigation.collapseWidth} - ${theme.spacing(2)}px + 1px);
+  padding-left: calc(${theme.spacing(1)}px / 2);
+  font-size: calc(${theme.template.navigation.collapseWidth} - ${theme.spacing(4)}px);
+`)
+
+const ListItemText = styled(BaseListItemText)(({ theme }) => css`
+`)
 
 const Menu = styled(BaseDrawer)(({ theme }) => css`
 .MuiPaper-root {

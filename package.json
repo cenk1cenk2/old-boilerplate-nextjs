@@ -14,7 +14,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "lint-staged": {
@@ -64,6 +65,8 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-jsx": "^2.2.8",
     "babel-plugin-styled-components": "^1.10.7",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "3.2.0",
     "eslint": "^7.0.0",
     "eslint-plugin-react": "^7.20.0",
     "husky": "^4.2.5",
@@ -89,5 +92,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

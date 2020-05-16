@@ -2,7 +2,7 @@ import { Grid } from '@material-ui/core'
 import React, { Component, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 
-import { name, version } from '../../../package.json'
+import { projectDetails } from '@interfaces/project.constants'
 
 export class BottomLogo extends Component {
   render () {
@@ -16,11 +16,11 @@ export class BottomLogo extends Component {
               </Logo>
             </Grid>
             <Grid item className="font-w300">
-              {name}
+              {projectDetails.name}
             </Grid>
           </Grid>
           <Grid item className="text-muted">
-            <small>v{version}</small>
+            <small>v{projectDetails.version}</small>
           </Grid>
         </Grid>
       </Fragment>

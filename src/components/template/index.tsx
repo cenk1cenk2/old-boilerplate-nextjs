@@ -116,7 +116,7 @@ export class Template extends Component<TemplateProps, Partial<State>> {
     return (
       <Fragment>
         <Provider value={this.state}>
-          <Header transperent={this.state.header?.transperent} narrow={this.state.narrow} project={this.props.project} />
+          <Header transperent={this.state.header?.transperent} narrow={this.state.narrow} project={this.props.project} items={this.props.items} />
           <DrawerNavigation collapsable={this.props.navigation.collapsable} items={this.props.items} />
           <Main className={clsx(this.state.navigation.state, { narrow: this.state.narrow })}>
             {this.props.children}

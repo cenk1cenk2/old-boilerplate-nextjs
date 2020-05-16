@@ -4,8 +4,8 @@ import { ITheme } from 'interfaces/styles.interface'
 import { text } from './default.text'
 
 const colors: ITheme['colors'] = {
-  primary: '#454447',
-  secondary: '#aaaaaa',
+  primary: '#F0CE5C',
+  secondary: '#E3B505',
   success: '#78F029',
   warning: '#F0CE5C',
   error: '#F01C34',

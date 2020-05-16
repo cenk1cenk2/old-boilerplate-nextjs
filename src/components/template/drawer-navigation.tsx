@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Drawer as BaseDrawer, List, ListItem, ListItemIcon as BaseListItemIcon, ListItemText as BaseListItemText } from '@material-ui/core'
+import { Drawer as BaseDrawer, List, ListItem as BaseListItem, ListItemIcon as BaseListItemIcon, ListItemText as BaseListItemText } from '@material-ui/core'
 import clsx from 'clsx'
 import { debounce } from 'lodash'
 import React, { Component, Fragment } from 'react'
@@ -43,7 +43,7 @@ export class DrawerNavigation extends Component<Props> {
                       <Fragment key={item.url}>
                         <ListItem button>
                           <ListItemIcon><FontAwesomeIcon icon={item.icon} /></ListItemIcon>
-                          <ListItemText primary={item.name} className="h5" disableTypography />
+                          <ListItemText primary={item.name} className="h6" disableTypography />
                         </ListItem>
                       </Fragment>
                     )
@@ -70,10 +70,19 @@ export class DrawerNavigation extends Component<Props> {
   }
 }
 
+const ListItem = styled(BaseListItem)(({ theme }) => css`
+:hover {
+  .MuiListItemIcon-root {
+    color: ${theme.colors.text};
+  }
+}
+`)
+
 const ListItemIcon = styled(BaseListItemIcon)(({ theme }) => css`
   min-width: calc(${theme.template.navigation.collapseWidth} - ${theme.spacing(2)}px + 1px);
   padding-left: calc(${theme.spacing(1)}px / 2);
-  font-size: calc(${theme.template.navigation.collapseWidth} - ${theme.spacing(4)}px);
+  font-size: calc((${theme.template.navigation.collapseWidth} - ${theme.spacing(4)}px) / 1.5);
+  color: ${theme.colors.muted};
 `)
 
 const ListItemText = styled(BaseListItemText)(({ theme }) => css`

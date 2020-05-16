@@ -8,7 +8,7 @@ import { Component, Fragment, FunctionComponent } from 'react'
 import styled, { css, DefaultTheme, withTheme } from 'styled-components'
 
 import { Consumer } from './index'
-import { ActionTypes, NavigationTypes, NavigationStates } from './index.interface'
+import { ActionTypes, NavigationTypes, NavigationStates, NavigationItems } from './index.interface'
 import { TabsNavigation } from './tabs-navigation'
 import { CastEvent } from '@src/interfaces/event.interface'
 
@@ -29,6 +29,7 @@ export interface Props {
       right: any
     }
   }
+  items?: NavigationItems[]
 }
 
 export interface State {
@@ -99,7 +100,7 @@ export class Header extends Component<Props, State> {
                     </Fragment>}
                     {context.navigation?.type === NavigationTypes.header &&
                     <Fragment>
-                      <TabsNavigation />
+                      <TabsNavigation items={this.props.items} />
                     </Fragment>}
                     {
                       this.props?.extend?.right ? <this.props.extend.right {...this.props.extend.props.right} /> : null
